@@ -21,7 +21,10 @@
     "resolveJsonModule": true,
     "importHelpers": true,
     "baseUrl": "src",
-    "paths": {}
+    "paths": {
+      "@env": ["env"],
+      "@lib/*": ["common/lib/*"],
+    }
   },
   "include": [
     "src/**/*.ts",
