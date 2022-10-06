@@ -47,7 +47,7 @@ export const env = {
     password: getOsEnvOptional('DB_PASSWORD'),
     database: getOsEnv('DB_DATABASE'),
     synchronize: toBool(getOsEnvOptional('DB_SYNCHRONIZE')),
-    logging: getOsEnv('DB_LOGGING'),
+    logging: getOsEnv('DB_LOGGING') === 'true',
     storage: getOsEnvOptional('DB_STORAGE'),
   },
   swagger: {
