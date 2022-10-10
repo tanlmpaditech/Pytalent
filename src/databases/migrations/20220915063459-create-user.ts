@@ -20,6 +20,12 @@ module.exports = {
         allowNull: false,
       },
 
+      password: {
+        type: Sequelize.TEXT,
+        field: 'password',
+        allowNull: false,
+      },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
