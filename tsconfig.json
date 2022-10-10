@@ -22,8 +22,17 @@
     "importHelpers": true,
     "baseUrl": "src",
     "paths": {
+      "@app": ["app"],
+      "@decorators/*": ["decorators/*"],
+      "@enum/*": ["enum/*"],
       "@env": ["env"],
+      "@exceptions/*": ["common/exceptions/*"],
       "@lib/*": ["common/lib/*"],
+      "@middlewares/*": ["app/middlewares/*"],
+      "@models/*": ["models/*"],
+      "@interfaces/*": ["interfaces/*"],
+      "@repositories/*": ["app/repositories/*"],
+      "@utils/*": ["common/utils/*"]
     }
   },
   "include": [
