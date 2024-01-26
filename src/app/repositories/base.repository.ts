@@ -23,6 +23,10 @@ export abstract class BaseRepository<M extends Model> implements BaseRepositoryI
     return this.model.findOne(object)
   }
 
+  async update(object: Object, condition: any): Promise<any> {
+    return this.model.update(object, condition);
+  }
+
   async getByCondition(whereClause: any, offset: number, limit: number, orderBy: any) {
     return this.model.findAndCountAll({
       where: whereClause,

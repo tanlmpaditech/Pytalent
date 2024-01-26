@@ -15,7 +15,13 @@ export default class User extends Model<User> {
   email!: string
 
   @Column
+  address!: string
+
+  @Column
   password!: string
+
+  @Column
+  type_user!: number
 
   @CreatedAt
   @Column

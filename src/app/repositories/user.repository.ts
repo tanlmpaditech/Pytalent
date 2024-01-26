@@ -1,4 +1,4 @@
-import User from '@models/entities/users.entity'
+import User from '@models/entities/user.entity'
 import { Service } from 'typedi'
 import { ModelCtor } from 'sequelize-typescript'
 import { BaseRepository } from './base.repository'
@@ -16,6 +16,24 @@ class UserRepository extends BaseRepository<User> implements UserRepositoryInter
       where: { email: email },
     })
   }
+
+  async findByAddress(address: string): Promise<User> {
+    return this.findByCondition({
+      where: { address: address },
+      raw: true,
+    })
+  }
+
+  async createUser(email: string, password: string): Promise<User> {
+    return this.create({ email, password })
+  }
+  
+  // async findOrCreateByAddress(address: string): Promise<[User, boolean]> {
+  //   return this.findOrCreateByCondition({
+  //     where: { address: address },
+  //     raw: true,
+  //   })
+  // }
 }
 
 export default UserRepository

@@ -10,11 +10,12 @@ import swaggerJSDoc from 'swagger-jsdoc'
 import swaggerUi from 'swagger-ui-express'
 import DB from '@models/index'
 import { logger, stream } from '@utils/logger'
-import { useExpressServer, useContainer } from 'routing-controllers'
+import { useExpressServer, useContainer, createExpressServer, Action } from 'routing-controllers'
 import { Container } from 'typedi'
 import path from 'path'
 import errorMiddleware from '@middlewares/error.middleware'
 import { env } from '@env'
+import { verifyToken } from '@utils/token'
 
 class App {
   public app: express.Application = express()
@@ -67,11 +68,33 @@ class App {
     useContainer(Container)
     useExpressServer(this.app, {
       defaultErrorHandler: false,
-      routePrefix: '/api/v1',
-      middlewares: [path.join(__dirname, '/app/middleware/*.ts')],
+      // routePrefix: '/api',
+      middlewares: [path.join(__dirname, '/app/middlewares/*.ts')],
       controllers: [path.join(__dirname, '/app/controllers/*.ts')],
     })
   }
+
+
+  // useContainer(Container)
+    // useExpressServer(this.app, {
+    //   plainToClassTransformOptions: {
+    //     excludeExtraneousValues: true,
+    //   },
+    //   validation: true,
+    //   authorizationChecker: async (action: Action, roles: string[]) => {
+    //     try {
+    //       const token = action.request.headers['authorization'].split(' ')[1]
+    //       await verifyToken(token)
+    //       return true
+    //     } catch (err: any) {
+    //       return false
+    //     }
+    //   },
+    //   defaultErrorHandler: false,
+    //   // routePrefix: '/api',
+    //   middlewares: [path.join(__dirname, '/app/middlewares/*.ts')],
+    //   controllers: [path.join(__dirname, '/app/controllers/*.ts')],
+    // })
 
   private register404Page() {
     this.app.get('*', function (req, res) {

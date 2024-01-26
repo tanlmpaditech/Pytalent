@@ -1,7 +1,7 @@
 import { ModelCtor } from 'sequelize-typescript'
 
 import DB from '@models/index'
-import User from '@models/entities/users.entity'
+import User from '@models/entities/user.entity'
 
 export function getModelFromTableName(tableName: string): ModelCtor | undefined {
   let item = undefined
