@@ -26,15 +26,12 @@ class AuthController extends BaseController {
         .responseErrors(res);
       }
       const findUserByEmail = await this.authRepository.findByEmail(req.body.email)
-      const hashPassword = bcrypt.hashSync(req.body.password, saltRounds)
-      console.log(hashPassword);
       if(!findUserByEmail) {
-        return this.setData('').setMessage('Username is not correct')
+        return this.setData('').setMessage('Username is incorrect')
         .responseErrors(res);
       }
-      // console.log(hashSync(req.body.password, salt));
-      if(!bcrypt.compareSync(hashPassword, findUserByEmail.password)) {
-        return this.setData('').setMessage('Password is not correct')
+      if(bcrypt.compareSync(req.body.password, findUserByEmail.password) == false) {
+        return this.setData('').setMessage('Password is incorrect')
         .responseErrors(res);
       }
       

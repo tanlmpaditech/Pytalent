@@ -11,13 +11,14 @@ class AssessmentRepository extends BaseRepository<Assessment> implements Assessm
     super(Assessment)
   }
 
-  async createAssessment(start: Date, end: Date, type: string): Promise<Assessment> {
-    return this.create({ start, end, type })
-  }
+  // async createAssessment(start: Date, end: Date, type: String): Promise<Assessment> {
+  //   return this.create({ start, end, type })
+  // }
   
-  async deleteAssessment(id: any): Promise<number> {
-    return this.deleteById({ id })
-  }
+  // async deleteAssessment(id: number): Promise<number> {
+  //   return this.deleteById(id)
+  //   // return this.deleteAssessment(id)
+  // }
 }
 
 export default AssessmentRepository

@@ -9,33 +9,31 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      
       start: {
         type: Sequelize.DATE,
         field: 'start',
+        allowNull: false,
       },
-
       end: {
         type: Sequelize.DATE,
         field: 'end',
+        allowNull: false,
       },
-
       type: {
         type: Sequelize.STRING,
         field: 'type',
+        allowNull: false,
       },
-
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        field: 'created_at',
+        field: 'createdAt',
       },
-
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        field: 'updated_at',
-      },
+        field: 'updatedAt',
+      }
     });
   },
   async down(queryInterface, Sequelize) {

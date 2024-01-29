@@ -1,4 +1,4 @@
-import Result from '@models/entities/user.entity'
+import Result from '@models/entities/result.entity'
 import { Service } from 'typedi'
 import { ModelCtor } from 'sequelize-typescript'
 import { BaseRepository } from './base.repository'

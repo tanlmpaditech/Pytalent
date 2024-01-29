@@ -47,9 +47,7 @@ export class UsersController extends BaseController {
   async createUser(@Req() req: AuthRequest, @Res() res: Response, next: NextFunction) {
     try {
       const data : UserDto = req.body
-      console.log(data);
       const hashPassword = bcrypt.hashSync(req.body.password, 10);
-      console.log(hashPassword);
       const userCreated = {
         name: data.name,
         email: data.email,

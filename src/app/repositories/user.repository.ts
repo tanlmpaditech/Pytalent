@@ -17,23 +17,10 @@ class UserRepository extends BaseRepository<User> implements UserRepositoryInter
     })
   }
 
-  // async findByAddress(address: string): Promise<User> {
-  //   return this.findByCondition({
-  //     where: { address: address },
-  //     raw: true,
-  //   })
-  // }
-
-  async createUser(email: string, password: string): Promise<User> {
-    return this.create({ email, password })
+  async createUser(email: string, password: string, type_user: number): Promise<User> {
+    return this.create({ email, password, type_user })
   }
-  
-  // async findOrCreateByAddress(address: string): Promise<[User, boolean]> {
-  //   return this.findOrCreateByCondition({
-  //     where: { address: address },
-  //     raw: true,
-  //   })
-  // }
+
 }
 
 export default UserRepository
