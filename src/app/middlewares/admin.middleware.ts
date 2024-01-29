@@ -22,7 +22,7 @@ export class AdminMiddleware implements ExpressMiddlewareInterface {
             const payload = await verifyToken(accessToken) as IAccessToken
             const user = await User.findOne({
                 where: {
-                    address: payload.address,
+                    email: payload.email,
                 },
                 raw: true,
             });

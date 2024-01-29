@@ -68,7 +68,7 @@ class App {
     useContainer(Container)
     useExpressServer(this.app, {
       defaultErrorHandler: false,
-      // routePrefix: '/api',
+      routePrefix: '/api',
       middlewares: [path.join(__dirname, '/app/middlewares/*.ts')],
       controllers: [path.join(__dirname, '/app/controllers/*.ts')],
     })

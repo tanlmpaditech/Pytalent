@@ -9,13 +9,13 @@ export default class Assessment extends Model<Assessment> {
   id!: number;
 
   @Column
-  start!: string;
+  start!: Date;
 
   @Column
-  end!: string;
+  end!: Date;
 
   @Column
-  type!: string;
+  type!: String;
 
   @CreatedAt
   @Column
@@ -25,5 +25,3 @@ export default class Assessment extends Model<Assessment> {
   @Column
   updatedAt!: Date;
 }
-
-export { Assessment };

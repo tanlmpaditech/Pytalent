@@ -1,5 +1,5 @@
-const loginMessage = (address: string) => {
-  return `Welcome to ${address}`;
+const loginMessage = () => {
+  return `Welcome`;
 };
 
 export { loginMessage };

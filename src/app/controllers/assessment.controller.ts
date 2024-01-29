@@ -3,8 +3,7 @@ import { Service } from "typedi";
 import { BaseController } from "./base.controller";
 import AssessmentRepository from "@repositories/assessment.repository";
 import { AuthMiddleware } from "@middlewares/auth.middleware";
-import { NextFunction, Response } from "express";
-import { plainToClass } from "class-transformer";
+import { NextFunction, Request, Response } from "express";
 import { AssessmentDto } from "dtos/assessment.dto";
 
 @JsonController()
@@ -17,24 +16,23 @@ export class AssessmentController extends BaseController {
   // @Authorized()
   // @UseBefore(AuthMiddleware)
   @Post('/create-assessment')
-  async createAssessment(@Req() req: any, @Res() res: Response, next: NextFunction) {
+  async createAssessment(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
-      // const data = plainToClass(AssessmentDto, req.body)
-      const data = req.body;
+      const data: AssessmentDto = req.body;
       console.log(data);
       await this.assessmentRepository.create(data)
-      return this.setMessage('Success').responseSuccess(res);
+      return this.setData(data).setMessage('Success').responseSuccess(res);
     } catch (error) {
       return this.setMessage('Error').responseErrors(res)
     }
   }
 
-  @Authorized()
-  @UseBefore(AuthMiddleware)
-  @Delete('/delete-assessment')
-  async deleteAssessment(@Req() req: any, @Res() res: Response, next: NextFunction) {
+  // @Authorized()
+  // @UseBefore(AuthMiddleware)
+  @Delete('/delete-assessment/:id')
+  async deleteAssessment(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
-      const { id } = req.body;
+      const { id } = req.params;
       await this.assessmentRepository.deleteById(id)
       return this.setMessage('Success').responseSuccess(res);
     } catch (error) {

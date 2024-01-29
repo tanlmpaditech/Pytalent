@@ -6,20 +6,19 @@ import UserRepository from '@repositories/user.repository'
 import { AuthMiddleware } from '@middlewares/auth.middleware'
 import { AuthRequest } from '@interfaces/response.interface'
 import { UserDto } from 'dtos/user.dto'
-import { plainToClass } from 'class-transformer'
 import { AdminMiddleware } from '@middlewares/admin.middleware'
 
-@JsonController('/user')
+@JsonController()
 @Service()
 export class UsersController extends BaseController {
   constructor(protected userRepository: UserRepository) {
     super()
   }
 
-  @Authorized()
-  @UseBefore(AdminMiddleware)
+  // @Authorized()
+  // @UseBefore(AdminMiddleware)
   @Get('/users')
-  async getUser(@Req() req: any, @Res() res: any, next: NextFunction) {
+  async getUser(@Req() req: AuthRequest, @Res() res: any, next: NextFunction) {
     try {
       const findAllUsersData = await this.userRepository.getAll()
       return this.setData(findAllUsersData).setMessage('Success').responseSuccess(res)
@@ -28,12 +27,13 @@ export class UsersController extends BaseController {
     }
   }
 
-  @Authorized()
-  @UseBefore(AuthMiddleware)
+  // @Authorized()
+  // @UseBefore(AuthMiddleware)
   @Get('/user/:id')
   async getUserDetail(@Req() req: AuthRequest, @Res() res: Response, next: NextFunction) {
     try {
-      const { id } = req.user;
+      const id = req.params;
+      console.log(id);
       const findUserById = await this.userRepository.findById(id);
       return this.setData(findUserById).setMessage('Get user detail successfully').responseSuccess(res);
     } catch (error) {
@@ -44,9 +44,9 @@ export class UsersController extends BaseController {
   @Authorized()
   @UseBefore(AdminMiddleware)
   @Post('/create-user')
-  async createUser(@Req() req: any, @Res() res: Response, next: NextFunction) {
+  async createUser(@Req() req: AuthRequest, @Res() res: Response, next: NextFunction) {
     try {
-      const data = plainToClass(UserDto, req.body)
+      const data : UserDto = req.body
       console.log(data);
       await this.userRepository.create(data)
       return this.setMessage('Success').responseSuccess(res);

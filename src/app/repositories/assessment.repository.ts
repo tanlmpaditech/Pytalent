@@ -15,6 +15,9 @@ class AssessmentRepository extends BaseRepository<Assessment> implements Assessm
     return this.create({ start, end, type })
   }
   
+  async deleteAssessment(id: any): Promise<number> {
+    return this.deleteById({ id })
+  }
 }
 
 export default AssessmentRepository

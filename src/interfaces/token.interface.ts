@@ -3,5 +3,5 @@ export interface IRefreshToken {
 }
 
 export interface IAccessToken {
-  address: string;
+  email: string;
 }

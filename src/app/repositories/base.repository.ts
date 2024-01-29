@@ -11,7 +11,7 @@ export abstract class BaseRepository<M extends Model> implements BaseRepositoryI
     console.log(model)
   }
 
-  async findById(id: number): Promise<M> {
+  async findById(id: any): Promise<M> {
     return this.model.findByPk(id)
   }
 

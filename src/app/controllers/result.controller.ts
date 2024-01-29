@@ -4,7 +4,7 @@ import { BaseController } from './base.controller'
 import { Service } from 'typedi'
 import ResultRepository from '@repositories/result.repository'
 
-@JsonController('/user')
+@JsonController()
 @Service()
 export class ResultController extends BaseController {
   constructor(protected resultRepository: ResultRepository) {
@@ -27,11 +27,12 @@ export class ResultController extends BaseController {
     }
   }
 
-  @Authorized()
+  // @Authorized()
   @Get('/results')
   async getCandidateResult(@Req() req: any, @Res() res: Response, next: NextFunction) {
     try {
       const findAllCandidateResults = await this.resultRepository.getAll()
+      console.log(findAllCandidateResults);
       return this.setData(findAllCandidateResults).setMessage('Success').responseSuccess(res)
     } catch (error) {
       return this.setMessage('Error').responseErrors(res)

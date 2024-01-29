@@ -36,5 +36,3 @@ export default class Collection extends Model<Collection> {
   @Column
   updatedAt!: Date;
 }
-
-export { Collection };
