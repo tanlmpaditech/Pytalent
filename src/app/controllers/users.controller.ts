@@ -7,6 +7,7 @@ import { AuthMiddleware } from '@middlewares/auth.middleware'
 import { AuthRequest } from '@interfaces/response.interface'
 import { UserDto } from 'dtos/user.dto'
 import { AdminMiddleware } from '@middlewares/admin.middleware'
+import bcrypt from 'bcrypt'
 
 @JsonController()
 @Service()
@@ -32,8 +33,7 @@ export class UsersController extends BaseController {
   @Get('/user/:id')
   async getUserDetail(@Req() req: AuthRequest, @Res() res: Response, next: NextFunction) {
     try {
-      const id = req.params;
-      console.log(id);
+      const id = +req.params.id;
       const findUserById = await this.userRepository.findById(id);
       return this.setData(findUserById).setMessage('Get user detail successfully').responseSuccess(res);
     } catch (error) {
@@ -41,14 +41,22 @@ export class UsersController extends BaseController {
     }
   }
 
-  @Authorized()
-  @UseBefore(AdminMiddleware)
+  // @Authorized()
+  // @UseBefore(AdminMiddleware)
   @Post('/create-user')
   async createUser(@Req() req: AuthRequest, @Res() res: Response, next: NextFunction) {
     try {
       const data : UserDto = req.body
       console.log(data);
-      await this.userRepository.create(data)
+      const hashPassword = bcrypt.hashSync(req.body.password, 10);
+      console.log(hashPassword);
+      const userCreated = {
+        name: data.name,
+        email: data.email,
+        password: hashPassword,
+        type_user: data.type_user
+      }
+      await this.userRepository.create(userCreated)
       return this.setMessage('Success').responseSuccess(res);
     } catch (error) {
       return this.setMessage('Error').responseErrors(res)

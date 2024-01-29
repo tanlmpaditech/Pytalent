@@ -17,4 +17,9 @@ export class UserDto {
   @IsOptional()
   password: string;
 
+  @Expose()
+  @IsEmail()
+  @IsOptional()
+  type_user: number;
+
 }
