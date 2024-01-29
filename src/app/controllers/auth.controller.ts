@@ -19,17 +19,17 @@ class AuthController extends BaseController {
   async login(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
       if(!req.body.email || !req.body.password) {
-        return this.setMessage('Missing username or password')
+        return this.setData('').setMessage('Missing username or password')
         .responseErrors(res);
       }
       const findUserByEmail = await this.authRepository.findByEmail(req.body.email)
-      console.log(findUserByEmail);
+      console.log(findUserByEmail.password);
       if(!findUserByEmail) {
-        return this.setMessage('Username is not correct')
+        return this.setData('').setMessage('Username is not correct')
         .responseErrors(res);
       }
-      if(!findUserByEmail.password === req.body.password) {
-        return this.setMessage('Password is not correct')
+      if(findUserByEmail.password !== req.body.password) {
+        return this.setData('').setMessage('Password is not correct')
         .responseErrors(res);
       }
       const accessToken = createAccessToken(findUserByEmail);
