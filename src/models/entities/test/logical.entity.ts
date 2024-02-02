@@ -2,7 +2,7 @@
 import { Column, CreatedAt, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
 
 @Table({
-  tableName: 'tests',
+  tableName: 'logicals',
 })
 export default class Test extends Model<Test> {
   @PrimaryKey

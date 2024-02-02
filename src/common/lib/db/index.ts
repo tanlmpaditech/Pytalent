@@ -5,7 +5,7 @@ import User from '@models/entities/user.entity'
 import Assessment from '@models/entities/assessment.entity'
 import Result from '@models/entities/result.entity'
 import Collection from '@models/entities/collection.entity'
-import Test from '@models/entities/test.entity'
+import Test from '@models/entities/test/logical.entity'
 
 export function getModelFromTableName(tableName: string): ModelCtor | undefined {
   let item = undefined

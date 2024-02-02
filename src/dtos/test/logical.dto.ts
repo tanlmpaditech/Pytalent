@@ -1,7 +1,7 @@
 import { Expose } from 'class-transformer';
 import { IsOptional, IsString } from 'class-validator';
 
-export class TestDto {
+export class LogicalDto {
   @Expose()
   @IsString()
   @IsOptional()
@@ -11,5 +11,4 @@ export class TestDto {
   @IsString()
   @IsOptional()
   answer: String;
-
 }
