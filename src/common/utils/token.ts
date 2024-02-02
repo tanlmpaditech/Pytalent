@@ -7,8 +7,8 @@ const createAccessToken = (user: User): string => {
   return jwt.sign(
     {
       email: user.email,
+      type_user: user.type_user
     },
-
     env.app.jwt_secret as jwt.Secret,
     {
       expiresIn: '1h',

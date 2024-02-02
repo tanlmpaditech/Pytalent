@@ -1,17 +1,20 @@
 import { Expose } from 'class-transformer';
-import { IsEmail, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsDate, IsEmail, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class AssessmentDto {
   @Expose()
-  @IsString()
+  @IsDate()
   @IsOptional()
   start: Date;
 
   @Expose()
+  @IsString()
   @IsOptional()
   end: Date;
 
   @Expose()
+  @IsString()
   @IsOptional()
   type: String;
+
 }

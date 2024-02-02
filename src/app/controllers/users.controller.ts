@@ -55,7 +55,7 @@ export class UsersController extends BaseController {
         type_user: data.type_user
       }
       await this.userRepository.create(userCreated)
-      return this.setMessage('Success').responseSuccess(res);
+      return this.setData(userCreated).setMessage('Success').responseSuccess(res);
     } catch (error) {
       return this.setMessage('Error').responseErrors(res)
     }

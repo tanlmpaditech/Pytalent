@@ -13,12 +13,12 @@ export class UserDto {
   email: string;
 
   @Expose()
-  @IsEmail()
+  @IsString()
   @IsOptional()
   password: string;
 
   @Expose()
-  @IsEmail()
+  @IsString()
   @IsOptional()
   type_user: number;
 

@@ -3,6 +3,8 @@ import { NextFunction, Request, Response } from 'express'
 import { BaseController } from './base.controller'
 import { Service } from 'typedi'
 import ResultRepository from '@repositories/result.repository'
+import { ResultDto } from 'dtos/result.dto'
+import { AuthMiddleware } from '@middlewares/auth.middleware'
 
 @JsonController()
 @Service()
@@ -15,13 +17,8 @@ export class ResultController extends BaseController {
   @Post('/post-result')
   async postCandidateResult(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
-      // const email = req.body.email;
-      // const score = req.body.score;
-      // const data = { email: email, score: score }
-      // console.log(data);
-      const data = req.body;
-      console.log(data);
-      await this.resultRepository.create(data)
+      const data: ResultDto = req.body;
+      await this.resultRepository.create(data);
       return this.setData(data).setMessage('Success').responseSuccess(res);
     } catch (error) {
       return this.setMessage('Error').responseErrors(res)
@@ -34,7 +31,7 @@ export class ResultController extends BaseController {
   async getCandidateResult(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
       const findAllCandidateResults = await this.resultRepository.getAll()
-      console.log(findAllCandidateResults);
+      // console.log(findAllCandidateResults);
       return this.setData(findAllCandidateResults).setMessage('Success').responseSuccess(res)
     } catch (error) {
       return this.setMessage('Error').responseErrors(res)
@@ -44,7 +41,7 @@ export class ResultController extends BaseController {
   @Get('/result')
   async getCandidateResultByEmail(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
-      const email = req.params.email;
+      const email = req.body.email;
       const findResultByEmail = await this.resultRepository.findByEmail(email);
       return this.setData(findResultByEmail).setMessage('Get result successfully').responseSuccess(res);
     } catch (error) {

@@ -1,25 +1,37 @@
 // const wrapValuesWithDateTime = require('../utils/wrapValuesWithDateTime.ts')
 
-const assessments = [
-  {
-    id: 1,
-    start: '2024-01-29',
-    end: '2024-02-16',
-    type: '1'
-  },
+'use strict';
 
-  {
-    id: 2,
-    start: '2024-01-29',
-    end: '2024-02-18',
-    type: '2'
-  }
-]
+// const assessments = [
+//   {
+//     start: '2024-01-29',
+//     end: '2024-02-16',
+//     type: '1'
+//   },
+
+//   {
+//     start: '2024-01-29',
+//     end: '2024-02-18',
+//     type: '2'
+//   }
+// ]
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface) {
-    return [await queryInterface.bulkInsert('assessments', assessments)]
+    return [await queryInterface.bulkInsert('assessments',[
+  {
+    start: '2024-01-29',
+    end: '2024-02-16',
+    type: '1',
+  },
+
+  {
+    start: '2024-01-29',
+    end: '2024-02-18',
+    type: '2',
+  }
+])]
     /**
      * Add seed commands here.
      *
@@ -39,9 +51,7 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     return [
-      await queryInterface.bulkDelete('assessments', {
-        id: assessments.map((assessment) => assessment.id),
-      }),
+      await queryInterface.bulkDelete('assessments', null, {}),
     ]
   }
 };

@@ -11,11 +11,13 @@ export class AuthMiddleware implements ExpressMiddlewareInterface {
   // interface implementation is optional
   async use(request: AuthRequest, response: any, next?: (err?: any) => any): Promise<any> {
     const bearer = request.headers.authorization;
+    console.log(bearer);
     if (!bearer || !bearer.startsWith('Bearer ')) {
       return next(new HttpException(401, 'Unauthorized'));
     }
 
     const accessToken = bearer.split('Bearer ')[1].trim();
+    console.log(accessToken);
     try {
       const payload = (await verifyToken(accessToken)) as IAccessToken;
       const user = await User.findOne({

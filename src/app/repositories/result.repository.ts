@@ -11,9 +11,6 @@ class ResultRepository extends BaseRepository<Result> implements ResultRepositor
     super(Result)
   }
 
-  async postResult(email: string, score: string): Promise<Result> {
-    return this.create({ email, score })
-  }
 
   async findByEmail(email: string): Promise<Result> {
     return this.findByCondition({

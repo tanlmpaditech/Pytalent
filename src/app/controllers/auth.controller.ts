@@ -7,9 +7,8 @@ import { createAccessToken, createRefreshToken } from "@utils/token";
 import { REFRESH_TTL } from "@utils/constants";
 import { setCacheExpire } from "common/services/redis";
 import bcrypt from "bcrypt";
+import { AuthMiddleware } from "@middlewares/auth.middleware";
 
-
-// @JsonController('/auth')
 @JsonController()
 @Service()
 class AuthController extends BaseController {
@@ -20,7 +19,6 @@ class AuthController extends BaseController {
   @Post('/login')
   async login(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
-      const saltRounds = 10;
       if(!req.body.email || !req.body.password) {
         return this.setData('').setMessage('Missing username or password')
         .responseErrors(res);
@@ -30,13 +28,13 @@ class AuthController extends BaseController {
         return this.setData('').setMessage('Username is incorrect')
         .responseErrors(res);
       }
-      if(bcrypt.compareSync(req.body.password, findUserByEmail.password) == false) {
+      if(!bcrypt.compareSync(req.body.password, findUserByEmail.password)) {
         return this.setData('').setMessage('Password is incorrect')
         .responseErrors(res);
       }
       
       const accessToken = createAccessToken(findUserByEmail);
-      const refreshToken = createRefreshToken(findUserByEmail)
+      const refreshToken = createRefreshToken(findUserByEmail);
       setCacheExpire(`auth_refresh_email_${req.body.email}`, refreshToken, REFRESH_TTL);
       
       return this.setData({accessToken, refreshToken}).setCode(200).setMessage('Success').responseSuccess(res);

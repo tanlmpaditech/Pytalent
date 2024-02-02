@@ -65,8 +65,30 @@ class App {
   }
 
   private initializeRoutes() {
+    // useContainer(Container)
+    // useExpressServer(this.app, {
+    //   defaultErrorHandler: false,
+    //   routePrefix: '/api',
+    //   middlewares: [path.join(__dirname, '/app/middlewares/*.ts')],
+    //   controllers: [path.join(__dirname, '/app/controllers/*.ts')],
+    // })
+
     useContainer(Container)
     useExpressServer(this.app, {
+      plainToClassTransformOptions: {
+        excludeExtraneousValues: true,
+      },
+      validation: true,
+      authorizationChecker: async (action: Action, roles: string[]) => {
+        try {
+          const token = action.request.headers['authorization'].split(' ')[1]
+          console.log(token);
+          await verifyToken(token)
+          return true
+        } catch (err: any) {
+          return false
+        }
+      },
       defaultErrorHandler: false,
       routePrefix: '/api',
       middlewares: [path.join(__dirname, '/app/middlewares/*.ts')],
