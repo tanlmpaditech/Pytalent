@@ -20,6 +20,6 @@ export class UserDto {
   @Expose()
   @IsString()
   @IsOptional()
-  type_user: number;
+  role_id: number;
 
 }

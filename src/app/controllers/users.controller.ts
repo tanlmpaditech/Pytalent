@@ -52,7 +52,7 @@ export class UsersController extends BaseController {
         name: data.name,
         email: data.email,
         password: hashPassword,
-        type_user: data.type_user
+        role_id: data.role_id
       }
       await this.userRepository.create(userCreated)
       return this.setData(userCreated).setMessage('Success').responseSuccess(res);

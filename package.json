@@ -39,7 +39,6 @@
     "hpp": "^0.2.3",
     "ipfs": "^0.66.1",
     "ipfs-http-client": "^60.0.1",
-    "jshint": "^2.13.6",
     "jsonwebtoken": "^8.5.1",
     "mailgen": "^2.0.27",
     "mariadb": "^3.0.1",

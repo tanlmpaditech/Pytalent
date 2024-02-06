@@ -1,16 +1,15 @@
 import { Expose } from 'class-transformer';
 import { IsEmail, IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class ResultDto {
+export class GameDto {
   @Expose()
   @IsString()
   @IsOptional()
-  candidate_email: String;
+  type: String;
 
   @Expose()
-  @IsString()
   @IsOptional()
-  score: String;
+  time: Number;
 
   @Expose()
   @IsString()

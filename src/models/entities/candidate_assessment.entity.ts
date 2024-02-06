@@ -2,18 +2,18 @@
 import { Column, CreatedAt, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
 
 @Table({
-  tableName: 'logicals',
+  tableName: 'candidate_assessments',
 })
-export default class Test extends Model<Test> {
+export default class Candidate_assessment extends Model<Candidate_assessment> {
   @PrimaryKey
   @Column
   id!: number;
 
   @Column
-  question!: String;
+  candidate_id!: Number;
 
   @Column
-  answer!: String;
+  assessment_id!: Number;
 
   @CreatedAt
   @Column

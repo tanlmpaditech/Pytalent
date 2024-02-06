@@ -1,46 +1,37 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('results', {
+    await queryInterface.createTable('games', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.DataTypes.INTEGER
       },
-      candidate_email: {
+      type: {
         type: Sequelize.DataTypes.STRING,
-        field: 'email',
+        field: 'type',
         allowNull: false,
       },
-      assessment_game_id: {
+      time: {
         type: Sequelize.DataTypes.INTEGER,
-        field: 'assessment_game_id',
-        allowNull: false,
-      },
-      score: {
-        type: Sequelize.DataTypes.STRING,
-        field: 'score',
-        allowNull: false,
-      },
-      assessment_id: {
-        type: Sequelize.DataTypes.STRING,
-        field: 'assessment_id',
+        field: 'time',
         allowNull: false,
       },
       createdAt: {
+        allowNull: false,
         type: Sequelize.DataTypes.DATE,
         field: 'created_at',
-        allowNull: false,
       },
+
       updatedAt: {
         allowNull: false,
         type: Sequelize.DataTypes.DATE,
         field: 'updated_at',
-      }
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('results');
+    await queryInterface.dropTable('games');
   }
 };

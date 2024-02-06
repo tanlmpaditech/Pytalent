@@ -2,7 +2,7 @@ import { Authorized, Get, JsonController, Post, Put, Req, Res, UseBefore } from 
 import { NextFunction, Request, Response } from 'express'
 import { BaseController } from '../base.controller'
 import { Service } from 'typedi'
-import LogicalRepository from '@repositories/test/logical.repository'
+import LogicalRepository from '@repositories/game/logical.repository'
 
 @JsonController()
 @Service()

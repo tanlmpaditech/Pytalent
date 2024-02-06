@@ -6,32 +6,33 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.DataTypes.INTEGER
       },
       start: {
-        type: Sequelize.DATE,
+        type: Sequelize.DataTypes.DATE,
         field: 'start',
         allowNull: false,
       },
       end: {
-        type: Sequelize.DATE,
+        type: Sequelize.DataTypes.DATE,
         field: 'end',
         allowNull: false,
       },
       type: {
-        type: Sequelize.STRING,
+        type: Sequelize.DataTypes.STRING,
         field: 'type',
         allowNull: false,
       },
+      
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.DataTypes.DATE,
         field: 'created_at',
       },
 
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.DataTypes.DATE,
         field: 'updated_at',
       },
     });

@@ -5,42 +5,42 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.DataTypes.INTEGER,
       },
 
       name: {
-        type: Sequelize.STRING(255),
+        type: Sequelize.DataTypes.STRING(255),
         field: 'name',
         allowNull: false,
       },
 
       email: {
-        type: Sequelize.STRING(255),
+        type: Sequelize.DataTypes.STRING(255),
         field: 'email',
         allowNull: false,
       },
 
       password: {
-        type: Sequelize.TEXT,
+        type: Sequelize.DataTypes.TEXT,
         field: 'password',
         allowNull: false,
       },
 
-      type_user: {
-        type: Sequelize.INTEGER,
+      role_id: {
+        type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
       },
 
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.DataTypes.DATE,
         field: 'created_at',
       },
 
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.DataTypes.DATE,
         field: 'updated_at',
       },
     })

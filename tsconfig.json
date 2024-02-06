@@ -69,7 +69,7 @@
     "src/**/*.json",
     "src/tests/*.test.ts",
     "src/tests/**/*.test.ts",
-    "src/databases/config/setup.js"
+    "src/databases/config/setup.js",
   ],
   "exclude": [
     "node_modules",

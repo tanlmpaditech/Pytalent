@@ -1,26 +1,7 @@
-// const wrapValuesWithDateTime = require('../utils/wrapValuesWithDateTime.ts')
+const wrapValuesWithDateTimeAssessment = require('../utils/wrapValuesWithDateTime.ts')
 
-'use strict';
-
-// const assessments = [
-//   {
-//     start: '2024-01-29',
-//     end: '2024-02-16',
-//     type: '1'
-//   },
-
-//   {
-//     start: '2024-01-29',
-//     end: '2024-02-18',
-//     type: '2'
-//   }
-// ]
-
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up (queryInterface) {
-    return [await queryInterface.bulkInsert('assessments',[
-  {
+const assessments = [
+   {
     start: '2024-01-29',
     end: '2024-02-16',
     type: '1',
@@ -31,27 +12,17 @@ module.exports = {
     end: '2024-02-18',
     type: '2',
   }
-])]
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+]
+
+module.exports = {
+  async up(queryInterface) {
+    return [await queryInterface.bulkInsert('assessments', wrapValuesWithDateTimeAssessment(assessments))]
+
   },
 
-  async down (queryInterface) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+  async down(queryInterface) {
     return [
-      await queryInterface.bulkDelete('assessments', null, {}),
+      await queryInterface.bulkDelete('users', null, {}),
     ]
-  }
-};
+  },
+}

@@ -1,21 +1,16 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('logicals', {
+    await queryInterface.createTable('roles', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.DataTypes.INTEGER
       },
-      question: {
+      url: {
         type: Sequelize.DataTypes.STRING,
-        field: 'question',
-        allowNull: false,
-      },
-      answer: {
-        type: Sequelize.DataTypes.STRING,
-        field: 'answer',
+        field: 'url',
         allowNull: false,
       },
       createdAt: {
@@ -23,6 +18,7 @@ module.exports = {
         type: Sequelize.DataTypes.DATE,
         field: 'created_at',
       },
+
       updatedAt: {
         allowNull: false,
         type: Sequelize.DataTypes.DATE,
@@ -31,6 +27,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('logical_games');
+    await queryInterface.dropTable('roles');
   }
 };
