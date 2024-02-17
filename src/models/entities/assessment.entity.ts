@@ -15,7 +15,7 @@ export default class Assessment extends Model<Assessment> {
   end!: Date;
 
   @Column
-  type!: String;
+  status!: String;
 
   @CreatedAt
   @Column

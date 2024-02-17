@@ -2,25 +2,23 @@ import { Authorized, Get, JsonController, Post, Put, Req, Res, UseBefore } from 
 import { NextFunction, Request, Response } from 'express'
 import { BaseController } from './base.controller'
 import { Service } from 'typedi'
-import RoleRepository from '@repositories/role.repository'
-import { RoleDto } from 'dtos/role.dto'
+import Assessment_gameRepository from '@repositories/assessment_game.repository'
 
 @JsonController()
 @Service()
-export class RoleController extends BaseController {
-  constructor(protected roleRepository: RoleRepository) {
+export class Assessment_gameController extends BaseController {
+  constructor(protected Assessment_gameRepository: Assessment_gameRepository) {
     super()
   }
 
-  async addUrl(@Req() req: Request, @Res() res: Response, next: NextFunction) {
+  @Post('/add-game-to-assessment')
+  async addGameToAssessment(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
-      const data = req.body;
-      await this.roleRepository.create(data)
+      const data: Assessment_gameRepository = req.body;
+      await this.Assessment_gameRepository.create(data)
       return this.setData(data).setMessage('Success').responseSuccess(res);
     } catch (error) {
       return this.setMessage('Error').responseErrors(res)
     }
   }
-  return;
 }
-

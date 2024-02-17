@@ -8,8 +8,9 @@ import Candidate_assessment from '@models/entities/candidate_assessment.entity'
 import Game from '@models/entities/game.entity'
 import Hr_game from '@models/entities/hr_game.entity'
 import Role from '@models/entities/role.entity'
-import Logical from '@models/entities/game/logical.entity'
-import Memory from '@models/entities/game/memory.entity'
+import Logical from '@models/entities/logical.entity'
+import Memory from '@models/entities/memory.entity'
+import Assessment_game from '@models/entities/assessment_game.entity'
 
 export function getModelFromTableName(tableName: string): ModelCtor | undefined {
   let item = undefined
@@ -34,6 +35,9 @@ export function getModelFromTableName(tableName: string): ModelCtor | undefined 
       break
     case Role.tableName:
       item = DB.sequelize.model(Role)
+      break
+    case Assessment_game.tableName:
+      item = DB.sequelize.model(Assessment_game)
       break
     case Logical.tableName:
       item = DB.sequelize.model(Logical)

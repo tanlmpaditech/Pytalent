@@ -1,8 +1,8 @@
 import { Authorized, Get, JsonController, Post, Put, Req, Res, UseBefore } from 'routing-controllers'
 import { NextFunction, Response } from 'express'
-import { BaseController } from '../base.controller'
+import { BaseController } from './base.controller'
 import { Service } from 'typedi'
-import MemoryRepository from '@repositories/game/memory.repository'
+import MemoryRepository from '@repositories/memory.repository'
 
 @JsonController()
 @Service()

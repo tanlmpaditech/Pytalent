@@ -1,6 +1,7 @@
 import { Service } from 'typedi'
 import { ModelCtor, Model } from 'sequelize-typescript'
 import { BaseRepositoryInterface } from './interfaces/base.repository.interface'
+import { Sequelize } from 'sequelize'
 
 @Service()
 export abstract class BaseRepository<M extends Model> implements BaseRepositoryInterface {
@@ -19,12 +20,20 @@ export abstract class BaseRepository<M extends Model> implements BaseRepositoryI
     return this.model.findAll()
   }
 
+  // async findAttributes(attribute: any, limit: number): Promise<M[]> {
+  //   return this.model.findAll({attributes: attribute}, limit: limit)
+  // }
+
   async findByCondition(object: Object): Promise<M> {
     return this.model.findOne(object)
   }
 
   async update(object: Object, condition: any): Promise<any> {
     return this.model.update(object, condition);
+  }
+
+  async findAllByCondition(object: Object): Promise<any> {
+    return this.model.findAll(object)
   }
 
   async getByCondition(whereClause: any, offset: number, limit: number, orderBy: any) {

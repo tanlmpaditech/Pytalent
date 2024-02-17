@@ -15,6 +15,6 @@ export class AssessmentDto {
   @Expose()
   @IsString()
   @IsOptional()
-  type: String;
+  status: String;
 
 }

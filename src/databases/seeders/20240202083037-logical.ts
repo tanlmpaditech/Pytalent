@@ -1,7 +1,6 @@
-
-module.exports = {
-  async up (queryInterface, Sequelize) {
-    return await queryInterface.bulkInsert('logicals', [
+const wrapValuesWithDateTimeLogical = require('../utils/wrapValuesWithDateTime.ts')
+const logical = 
+[
     {
         question: "-T[[huTH!8",
         answer: true
@@ -430,7 +429,11 @@ module.exports = {
         question: "<k$CJ'n_VJ",
         answer: false
     }
-]);
+]
+module.exports = {
+  async up (queryInterface, Sequelize) {
+    return await queryInterface.bulkInsert('logicals', wrapValuesWithDateTimeLogical(logical)
+);
   },
 
   async down (queryInterface, Sequelize) {

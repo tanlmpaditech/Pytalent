@@ -1,8 +1,9 @@
 import { Authorized, Get, JsonController, Post, Put, Req, Res, UseBefore } from 'routing-controllers'
-import { NextFunction, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import { BaseController } from './base.controller'
 import { Service } from 'typedi'
 import GameRepository from '@repositories/game.repository'
+import { GameDto } from 'dtos/game.dto'
 
 @JsonController()
 @Service()
@@ -11,5 +12,15 @@ export class GameController extends BaseController {
     super()
   }
 
-  return;
+  @Post('/add-game')
+  async addGame(@Req() req: Request, @Res() res: Response, next: NextFunction) {
+    try {
+      const data: GameDto = req.body;
+      await this.gameRepository.create(data)
+      return this.setData(data).setMessage('Success').responseSuccess(res);
+    } catch (error) {
+      return this.setMessage('Error').responseErrors(res)
+    }
+  }
+  
 }

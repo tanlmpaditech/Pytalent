@@ -1,14 +1,18 @@
 'use strict';
+const wrapValuesWithDateTimeResult = require('../utils/wrapValuesWithDateTime.ts')
 
+const result = [{
+      email: 'example@example.com',
+      assessment_game_id: 1,
+      score: '9',
+      assessment_id: 1,
+      created_at: new Date(),
+      updated_at: new Date(),
+    }]
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-   return await queryInterface.bulkInsert('results', [{
-      email: 'example@example.com',
-      score: '9',
-      created_at: new Date(),
-      updated_at: new Date(),
-    }]);
+   return await queryInterface.bulkInsert('results', wrapValuesWithDateTimeResult(result));
   },
 
   async down (queryInterface, Sequelize) {

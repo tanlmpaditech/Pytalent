@@ -2,9 +2,9 @@
 import { Column, CreatedAt, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
 
 @Table({
-  tableName: 'logicals',
+  tableName: 'memories',
 })
-export default class Logical extends Model<Logical> {
+export default class Memory extends Model<Memory> {
   @PrimaryKey
   @Column
   id!: number;

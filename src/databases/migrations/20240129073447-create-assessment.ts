@@ -11,16 +11,14 @@ module.exports = {
       start: {
         type: Sequelize.DataTypes.DATE,
         field: 'start',
-        allowNull: false,
       },
       end: {
         type: Sequelize.DataTypes.DATE,
         field: 'end',
-        allowNull: false,
       },
-      type: {
+      status: {
         type: Sequelize.DataTypes.STRING,
-        field: 'type',
+        field: 'status',
         allowNull: false,
       },
       
