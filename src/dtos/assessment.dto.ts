@@ -17,4 +17,8 @@ export class AssessmentDto {
   @IsOptional()
   status: String;
 
+  @Expose()
+  @IsOptional()
+  hr_id: number;
+
 }

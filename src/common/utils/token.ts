@@ -6,8 +6,9 @@ import { env } from '@env';
 const createAccessToken = (user: User): string => {
   return jwt.sign(
     {
+      id: user.id,
       email: user.email,
-      type_user: user.type_user
+      role_id: user.role_id,
     },
     env.app.jwt_secret as jwt.Secret,
     {

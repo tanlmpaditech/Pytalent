@@ -18,6 +18,11 @@ module.exports = {
         field: 'level',
         allowNull: false,
       },
+      time: {
+        type: Sequelize.DataTypes.INTEGER,
+        field: 'time',
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DataTypes.DATE,

@@ -5,9 +5,10 @@ import { HttpException } from '@exceptions/http.exception';
 import { IAccessToken } from '@interfaces/token.interface';
 import { verifyToken } from '@utils/token';
 import User from '@models/entities/user.entity';
+import RoleId from '@enum/user.enum';
 
 @Service()
-export class AuthMiddleware implements ExpressMiddlewareInterface {
+export class CandidateAuthMiddleware implements ExpressMiddlewareInterface {
   // interface implementation is optional
   async use(request: AuthRequest, response: any, next?: (err?: any) => any): Promise<any> {
     const bearer = request.headers.authorization;
@@ -26,8 +27,7 @@ export class AuthMiddleware implements ExpressMiddlewareInterface {
         raw: true,
       });
 
-      if (!user) {
-        console.log(2);
+      if (user.role_id !== RoleId.CANDIDATE) {
         return next(new HttpException(401, 'Unauthorized'));
       }
 

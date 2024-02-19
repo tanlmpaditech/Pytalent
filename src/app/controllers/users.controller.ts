@@ -3,11 +3,12 @@ import { NextFunction, Response } from 'express'
 import { BaseController } from './base.controller'
 import { Service } from 'typedi'
 import UserRepository from '@repositories/user.repository'
-import { AuthMiddleware } from '@middlewares/auth.middleware'
+import { HrAuthMiddleware } from '@middlewares/hr_auth.middleware'
 import { AuthRequest } from '@interfaces/response.interface'
 import { UserDto } from 'dtos/user.dto'
 import { AdminMiddleware } from '@middlewares/admin.middleware'
 import bcrypt from 'bcrypt'
+import { AuthMiddleware } from '@middlewares/auth.middleware'
 
 @JsonController()
 @Service()
@@ -16,8 +17,8 @@ export class UsersController extends BaseController {
     super()
   }
 
-  // @Authorized()
-  // @UseBefore(AdminMiddleware)
+  @Authorized()
+  @UseBefore(AdminMiddleware)
   @Get('/users')
   async getUser(@Req() req: AuthRequest, @Res() res: any, next: NextFunction) {
     try {
@@ -28,8 +29,8 @@ export class UsersController extends BaseController {
     }
   }
 
-  // @Authorized()
-  // @UseBefore(AuthMiddleware)
+  @Authorized()
+  @UseBefore(AdminMiddleware)
   @Get('/user/:id')
   async getUserDetail(@Req() req: AuthRequest, @Res() res: Response, next: NextFunction) {
     try {
@@ -41,8 +42,8 @@ export class UsersController extends BaseController {
     }
   }
 
-  // @Authorized()
-  // @UseBefore(AdminMiddleware)
+  @Authorized()
+  @UseBefore(AdminMiddleware)
   @Post('/create-user')
   async createUser(@Req() req: AuthRequest, @Res() res: Response, next: NextFunction) {
     try {

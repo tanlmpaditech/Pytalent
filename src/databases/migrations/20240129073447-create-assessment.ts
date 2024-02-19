@@ -21,7 +21,11 @@ module.exports = {
         field: 'status',
         allowNull: false,
       },
-      
+      hr_id: {
+        type: Sequelize.DataTypes.STRING,
+        field: 'hr_id',
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DataTypes.DATE,

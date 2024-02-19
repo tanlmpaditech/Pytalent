@@ -22,4 +22,10 @@ export default class Assessment_game extends Model<Assessment_game> {
   @UpdatedAt
   @Column
   updatedAt!: Date;
+
+  static associate(models) {
+    this.hasMany(models.Assessment, {
+      foreignKey: 'game_id'
+    })
+  }
 }

@@ -7,7 +7,6 @@ import { createAccessToken, createRefreshToken } from "@utils/token";
 import { REFRESH_TTL } from "@utils/constants";
 import { setCacheExpire } from "common/services/redis";
 import bcrypt from "bcrypt";
-import { AuthMiddleware } from "@middlewares/auth.middleware";
 
 @JsonController()
 @Service()

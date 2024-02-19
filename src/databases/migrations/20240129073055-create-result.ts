@@ -23,11 +23,6 @@ module.exports = {
         field: 'score',
         allowNull: false,
       },
-      assessment_id: {
-        type: Sequelize.DataTypes.STRING,
-        field: 'assessment_id',
-        allowNull: false,
-      },
       createdAt: {
         type: Sequelize.DataTypes.DATE,
         field: 'created_at',

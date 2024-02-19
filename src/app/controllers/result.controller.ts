@@ -4,6 +4,9 @@ import { BaseController } from './base.controller'
 import { Service } from 'typedi'
 import ResultRepository from '@repositories/result.repository'
 import { ResultDto } from 'dtos/result.dto'
+import { HrAuthMiddleware } from '@middlewares/hr_auth.middleware'
+import { AdminMiddleware } from '@middlewares/admin.middleware'
+import DB from '@models/index'
 import { AuthMiddleware } from '@middlewares/auth.middleware'
 
 @JsonController()
@@ -13,7 +16,8 @@ export class ResultController extends BaseController {
     super()
   }
 
-  // @Authorized()
+  @Authorized()
+  @UseBefore(AuthMiddleware)
   @Post('/post-result')
   async postCandidateResult(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
@@ -25,8 +29,8 @@ export class ResultController extends BaseController {
     }
   }
 
-  // @Authorized()
-  // @UseBefore(AuthMiddleware)
+  @Authorized()
+  @UseBefore(AdminMiddleware)
   @Get('/all-results')
   async getCandidateResult(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
@@ -41,9 +45,15 @@ export class ResultController extends BaseController {
   @Get('/result')
   async getCandidateResultByEmail(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
-      const email = req.body.email;
-      const findResultByEmail = await this.resultRepository.findByEmail(email);
-      return this.setData(findResultByEmail).setMessage('Get result successfully').responseSuccess(res);
+      const id = req.body.id;
+      // const findResultByEmail = await this.resultRepository.findByEmail(email);
+      const result = await this.resultRepository.findAllByCondition({
+        include: [{
+          model: DB.sequelize.models.assessment_game,
+          where: {assessment_game_id: id}
+        }]
+      })
+      return this.setData(result).setMessage('Get result successfully').responseSuccess(res);
     } catch (error) {
       return this.setMessage('Error').responseErrors(res)
     }

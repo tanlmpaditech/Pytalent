@@ -57,6 +57,9 @@ export abstract class BaseRepository<M extends Model> implements BaseRepositoryI
     return this.model.destroy({ where: { id: id } })
   }
 
+  // async deleteByCondition(object: Object): Promise<M> {
+  //   return this.model.destroy(object)
+  // }
   /**
    * create equal predicate for where clause.
    * @private

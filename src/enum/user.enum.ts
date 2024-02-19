@@ -1,6 +1,7 @@
-enum UserType {
+enum RoleId {
   ADMIN,
-  USER,
+  HR,
+  CANDIDATE
 }
 
-export default UserType;
+export default RoleId;

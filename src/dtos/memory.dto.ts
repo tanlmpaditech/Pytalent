@@ -10,4 +10,8 @@ export class MemoryDto {
   @Expose()
   @IsOptional()
   level: Number;
+
+  @Expose()
+  @IsOptional()
+  time: Number;
 }

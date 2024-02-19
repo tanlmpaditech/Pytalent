@@ -12,9 +12,6 @@ export default class Game extends Model<Game> {
   @Column
   type!: String;
 
-  @Column
-  time!: Number;
-
   @CreatedAt
   @Column
   createdAt!: Date;
@@ -22,4 +19,14 @@ export default class Game extends Model<Game> {
   @UpdatedAt
   @Column
   updatedAt!: Date;
+
+  static associate(models) {
+    this.hasMany(models.Assessment_game, {
+      foreignKey: 'game_id'
+    }),
+    this.hasMany(models.Hr_game), {
+      foreignKey: 'id',
+    }
+  }
+
 }

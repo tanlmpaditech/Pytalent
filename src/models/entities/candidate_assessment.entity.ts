@@ -22,4 +22,6 @@ export default class Candidate_assessment extends Model<Candidate_assessment> {
   @UpdatedAt
   @Column
   updatedAt!: Date;
+
+  
 }

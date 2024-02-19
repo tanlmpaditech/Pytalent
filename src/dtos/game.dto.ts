@@ -7,13 +7,4 @@ export class GameDto {
   @IsOptional()
   type: String;
 
-  @Expose()
-  @IsOptional()
-  time: Number;
-
-  @Expose()
-  @IsString()
-  @IsOptional()
-  assessment_game_id: String;
-
 }

@@ -12,7 +12,6 @@ import { Service } from "typedi";
 export class AdminMiddleware implements ExpressMiddlewareInterface {
     async use(request: AuthRequest, response: any, next?: (err?: any) => any): Promise<any> {
         const bearer = request.headers.authorization;
-            // console.log(bearer);
         if (!bearer || !bearer.startsWith('Bearer ')) {
             return next(new HttpException(401, 'Unauthorized'));
         }
@@ -27,7 +26,7 @@ export class AdminMiddleware implements ExpressMiddlewareInterface {
                 raw: true,
             });
 
-            if (user.type_user !== UserType.ADMIN) {
+            if (user.role_id !== UserType.ADMIN) {
                 return next(new HttpException(401, 'Unauthorized'));
             }
 
@@ -35,7 +34,8 @@ export class AdminMiddleware implements ExpressMiddlewareInterface {
 
             return next();
         } catch (error) {
-            return next(new HttpException(401, 'Unauthorised'));
+            console.log(error);
+            return next(new HttpException(401, 'Unauthorized'));
         }
     }
 }

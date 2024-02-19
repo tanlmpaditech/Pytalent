@@ -17,6 +17,9 @@ export default class Assessment extends Model<Assessment> {
   @Column
   status!: String;
 
+  @Column
+  hr_id!: Number;
+
   @CreatedAt
   @Column
   createdAt!: Date;
@@ -24,4 +27,11 @@ export default class Assessment extends Model<Assessment> {
   @UpdatedAt
   @Column
   updatedAt!: Date;
+
+  static associate(models) {
+    this.hasMany(models.Assessment_game , {
+      foreignKey: 'id'
+    })
+    this.hasMany(models.Candidate_assessment)
+  }
 }

@@ -18,7 +18,7 @@ export default class User extends Model<User> {
   password!: string
 
   @Column
-  type_user!: number
+  role_id!: number
 
   @CreatedAt
   @Column

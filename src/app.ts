@@ -81,8 +81,7 @@ class App {
       validation: true,
       authorizationChecker: async (action: Action, roles: string[]) => {
         try {
-          const token = action.request.headers['authorization'].split(' ')[1]
-          console.log(token);
+          const token = action.request.headers['authorization'].split(' ')[1];
           await verifyToken(token)
           return true
         } catch (err: any) {

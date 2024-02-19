@@ -17,8 +17,8 @@ class UserRepository extends BaseRepository<User> implements UserRepositoryInter
     })
   }
 
-  async createUser(email: string, password: string, type_user: number): Promise<User> {
-    return this.create({ email, password, type_user })
+  async createUser(email: string, password: string, role_id: number): Promise<User> {
+    return this.create({ email, password, role_id })
   }
 
 }

@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from 'express'
 import { BaseController } from './base.controller'
 import { Service } from 'typedi'
 import Candidate_assessmentRepository from '@repositories/candidate_assessment.repository'
+import { HrAuthMiddleware } from '@middlewares/hr_auth.middleware'
 
 @JsonController()
 @Service()
@@ -11,11 +12,14 @@ export class Candidate_assessmentController extends BaseController {
     super()
   }
 
-  @Post('/add-candidate-to-assessment')
+  @Authorized()
+  @UseBefore(HrAuthMiddleware)
+  @Post('/add-candidate-to-assessment/:assessment_id')
   async addCandidateToAssessment(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
-      const data: Candidate_assessmentRepository = req.body;
-      console.log(data);
+      const assessment_id = req.params;
+      const candidate_id = req.body;
+      const data = {assessment_id, candidate_id}
       await this.candidate_assessmentRepository.create(data)
       return this.setData(data).setMessage('Success').responseSuccess(res);
     } catch (error) {

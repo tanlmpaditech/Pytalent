@@ -3,6 +3,8 @@ import { NextFunction, Request, Response } from 'express'
 import { BaseController } from './base.controller'
 import { Service } from 'typedi'
 import LogicalRepository from '@repositories/logical.repository'
+import AuthController from './auth.controller'
+import { AuthMiddleware } from '@middlewares/auth.middleware'
 
 @JsonController()
 @Service()
@@ -11,6 +13,8 @@ export class LogicalController extends BaseController {
     super()
   }
 
+  @Authorized()
+  @UseBefore(AuthMiddleware)
   @Get('/assessment/:id/logical')
   async getLogicalQuestion(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {

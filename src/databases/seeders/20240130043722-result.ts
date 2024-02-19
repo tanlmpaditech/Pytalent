@@ -5,7 +5,6 @@ const result = [{
       email: 'example@example.com',
       assessment_game_id: 1,
       score: '9',
-      assessment_id: 1,
       created_at: new Date(),
       updated_at: new Date(),
     }]

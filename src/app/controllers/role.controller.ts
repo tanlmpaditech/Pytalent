@@ -21,6 +21,5 @@ export class RoleController extends BaseController {
       return this.setMessage('Error').responseErrors(res)
     }
   }
-  return;
 }
 
