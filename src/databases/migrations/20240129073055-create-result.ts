@@ -8,9 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.DataTypes.INTEGER
       },
-      candidate_email: {
-        type: Sequelize.DataTypes.STRING,
-        field: 'email',
+      candidate_id: {
+        type: Sequelize.DataTypes.INTEGER,
+        field: 'candidate_id',
         allowNull: false,
       },
       assessment_game_id: {
@@ -19,7 +19,7 @@ module.exports = {
         allowNull: false,
       },
       score: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.INTEGER,
         field: 'score',
         allowNull: false,
       },

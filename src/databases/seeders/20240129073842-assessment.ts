@@ -2,18 +2,13 @@ const wrapValuesWithDateTimeAssessment = require('../utils/wrapValuesWithDateTim
 
 const assessments = [
    {
-    start: '2024-01-29',
-    end: '2024-02-25',
+    assessment_id: 1,
+    start: '2024-01-19T09:45:03.774Z',
+    end: '2024-02-25T09:45:03.774Z',
     status: 'active',
     hr_id: '1'
   },
 
-  {
-    start: '2024-01-29',
-    end: '2024-02-18',
-    status: 'closed',
-    hr_id: '2'
-  }
 ]
 
 module.exports = {

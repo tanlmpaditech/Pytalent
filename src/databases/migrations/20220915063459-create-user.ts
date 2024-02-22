@@ -8,6 +8,12 @@ module.exports = {
         type: Sequelize.DataTypes.INTEGER,
       },
 
+      user_id: {
+        type: Sequelize.DataTypes.INTEGER,
+        field: 'user_id',
+        allowNull: false,
+      },
+
       name: {
         type: Sequelize.DataTypes.STRING(255),
         field: 'name',

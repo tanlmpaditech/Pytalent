@@ -5,16 +5,16 @@ export class ResultDto {
   @Expose()
   @IsString()
   @IsOptional()
-  candidate_email: String;
+  candidate_id: Number;
 
   @Expose()
   @IsString()
   @IsOptional()
-  score: String;
+  score: Number;
 
   @Expose()
   @IsString()
   @IsOptional()
-  assessment_game_id: String;
+  assessment_game_id: Number;
 
 }

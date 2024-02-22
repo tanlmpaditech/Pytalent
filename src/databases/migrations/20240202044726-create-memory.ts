@@ -23,6 +23,11 @@ module.exports = {
         field: 'time',
         allowNull: false,
       },
+      score: {
+        type: Sequelize.DataTypes.INTEGER,
+        field: 'score',
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DataTypes.DATE,

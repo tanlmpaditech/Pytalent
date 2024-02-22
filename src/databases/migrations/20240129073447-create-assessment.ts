@@ -8,6 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.DataTypes.INTEGER
       },
+      assessment_id: {
+        type: Sequelize.DataTypes.INTEGER,
+        field: 'assessment_id',
+        allowNull: false,
+      },
       start: {
         type: Sequelize.DataTypes.DATE,
         field: 'start',

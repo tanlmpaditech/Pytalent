@@ -2,9 +2,9 @@
 const wrapValuesWithDateTimeResult = require('../utils/wrapValuesWithDateTime.ts')
 
 const result = [{
-      email: 'example@example.com',
+      candidate_id: 3,
       assessment_game_id: 1,
-      score: '9',
+      score: 9,
       created_at: new Date(),
       updated_at: new Date(),
     }]

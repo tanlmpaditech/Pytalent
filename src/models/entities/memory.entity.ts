@@ -15,6 +15,12 @@ export default class Memory extends Model<Memory> {
   @Column
   level!: Number;
 
+  @Column
+  time!: Number;
+
+  @Column
+  score!: Number;
+
   @CreatedAt
   @Column
   createdAt!: Date;

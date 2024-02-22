@@ -1,5 +1,7 @@
 
-import { Column, CreatedAt, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
+import { BelongsTo, Column, CreatedAt, ForeignKey, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
+import User from './user.entity';
+import Assessment from './assessment.entity';
 
 @Table({
   tableName: 'candidate_assessments',
@@ -9,9 +11,11 @@ export default class Candidate_assessment extends Model<Candidate_assessment> {
   @Column
   id!: number;
 
+  @ForeignKey(() => User)
   @Column
   candidate_id!: Number;
 
+  @ForeignKey(() => Assessment)
   @Column
   assessment_id!: Number;
 
@@ -23,5 +27,9 @@ export default class Candidate_assessment extends Model<Candidate_assessment> {
   @Column
   updatedAt!: Date;
 
-  
+  @BelongsTo(() => User)
+  user!: User;
+
+  @BelongsTo(() => Assessment)
+  assessment!: Assessment;
 }

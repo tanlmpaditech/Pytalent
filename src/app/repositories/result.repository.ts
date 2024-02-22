@@ -11,13 +11,6 @@ class ResultRepository extends BaseRepository<Result> implements ResultRepositor
     super(Result)
   }
 
-
-  async findByEmail(email: string): Promise<Result> {
-    return this.findByCondition({
-      where: { email: email },
-    })
-  }
-  
 }
 
 export default ResultRepository

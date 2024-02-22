@@ -8,6 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.DataTypes.INTEGER
       },
+      game_id: {
+        type: Sequelize.DataTypes.INTEGER,
+        field: 'game_id',
+        allowNull: false,
+      },
       type: {
         type: Sequelize.DataTypes.STRING,
         field: 'type',

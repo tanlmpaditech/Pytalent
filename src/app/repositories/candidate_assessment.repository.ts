@@ -13,6 +13,10 @@ class Candidate_assessmentRepository extends BaseRepository<Candidate_assessment
     super(Candidate_assessment)
   }
 
+  async map(object: Candidate_assessment): Promise<Candidate_assessment> {
+    return this.map(object);
+  }
+
 }
 
 export default Candidate_assessmentRepository

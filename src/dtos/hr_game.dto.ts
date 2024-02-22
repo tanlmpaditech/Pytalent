@@ -5,11 +5,11 @@ export class Hr_gameDto {
   @Expose()
   @IsString()
   @IsOptional()
-  hr_id: String;
+  hr_id: Number;
 
   @Expose()
   @IsString()
   @IsOptional()
-  game_id: String;
+  game_id: Number;
 
 }

@@ -1,5 +1,7 @@
 
-import { Column, CreatedAt, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
+import { BelongsTo, Column, CreatedAt, ForeignKey, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
+import User from './user.entity';
+import Game from './game.entity';
 
 @Table({
   tableName: 'hr_games',
@@ -9,9 +11,11 @@ export default class Hr_game extends Model<Hr_game> {
   @Column
   id!: number;
 
+  @ForeignKey(() => User)
   @Column
   hr_id!: Number;
 
+  @ForeignKey(() => Game)
   @Column
   game_id!: Number;
 
@@ -23,10 +27,10 @@ export default class Hr_game extends Model<Hr_game> {
   @Column
   updatedAt!: Date;
 
-  static associate(models) {
-      // define association here
-    this.hasMany(models.game, {
-      foreignKey: 'game_id',
-    })
-  }
+  @BelongsTo(() => User)
+  user: User;
+
+  @BelongsTo(() => Game)
+  game: Game;
+
 }

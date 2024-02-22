@@ -18,7 +18,6 @@ export class AuthMiddleware implements ExpressMiddlewareInterface {
     const accessToken = bearer.split('Bearer ')[1].trim();
     try {
       const payload = (await verifyToken(accessToken)) as IAccessToken;
-      console.log(payload);
       const user = await User.findOne({
         where: {
           email: payload.email,
@@ -27,7 +26,6 @@ export class AuthMiddleware implements ExpressMiddlewareInterface {
       });
 
       if (!user) {
-        console.log(2);
         return next(new HttpException(401, 'Unauthorized'));
       }
 

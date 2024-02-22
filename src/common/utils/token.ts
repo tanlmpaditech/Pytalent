@@ -12,7 +12,7 @@ const createAccessToken = (user: User): string => {
     },
     env.app.jwt_secret as jwt.Secret,
     {
-      expiresIn: '1h',
+      expiresIn: '4h',
     },
   );
 };

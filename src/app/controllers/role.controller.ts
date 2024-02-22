@@ -3,7 +3,6 @@ import { NextFunction, Request, Response } from 'express'
 import { BaseController } from './base.controller'
 import { Service } from 'typedi'
 import RoleRepository from '@repositories/role.repository'
-import { RoleDto } from 'dtos/role.dto'
 
 @JsonController()
 @Service()

@@ -14,15 +14,16 @@ export class MemoryController extends BaseController {
 
   @Authorized()
   @UseBefore(AuthMiddleware)
-  @Get('/assessment/:id/memory')
+  @Get('/assessment/:id/memory-game')
   async getLogicalQuestion(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
-      // const getQuestion = await this.memoryRepository.getLimit(['question', 'answer'], 20) //get 20 questions
-      return this.setData('').setMessage('Success').responseSuccess(res)
+      const data = await this.memoryRepository.findAllByCondition({
+        attributes: ['question', 'time', 'score']
+      });
+      return this.setData(data).setMessage('Success').responseSuccess(res)
     } catch (error) {
       console.log(error);
       return this.setMessage('Error').responseErrors(res)
     }
   }
-  return;
 }

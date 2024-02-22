@@ -3,9 +3,11 @@ const wrapValuesWithDateTimeGame = require('../utils/wrapValuesWithDateTime.ts')
 
 const game = [
     {
+        game_id: 1,
         type: 'logical',
     }, 
     {
+        game_id: 2,
         type: 'memory',
     }]
 /** @type {import('sequelize-cli').Migration} */

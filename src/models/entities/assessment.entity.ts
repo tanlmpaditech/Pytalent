@@ -1,4 +1,7 @@
-import { Column, CreatedAt, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
+import { Column, CreatedAt, ForeignKey, HasMany, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
+import User from './user.entity';
+import Assessment_game from './assessment_game.entity';
+import Candidate_assessment from './candidate_assessment.entity';
 
 @Table({
   tableName: 'assessments',
@@ -7,6 +10,10 @@ export default class Assessment extends Model<Assessment> {
   @PrimaryKey
   @Column
   id!: number;
+
+  @ForeignKey(() => Assessment_game)
+  @ForeignKey(() => Candidate_assessment)
+  assessment_id: number;
 
   @Column
   start!: Date;
@@ -17,6 +24,7 @@ export default class Assessment extends Model<Assessment> {
   @Column
   status!: String;
 
+  @ForeignKey(() => User)
   @Column
   hr_id!: Number;
 
@@ -28,10 +36,9 @@ export default class Assessment extends Model<Assessment> {
   @Column
   updatedAt!: Date;
 
-  static associate(models) {
-    this.hasMany(models.Assessment_game , {
-      foreignKey: 'id'
-    })
-    this.hasMany(models.Candidate_assessment)
-  }
+  @HasMany(() => Assessment_game)
+  assessment_game: Assessment_game[]
+
+  @HasMany(() => Candidate_assessment)
+  candidate_assessment: Candidate_assessment[]
 }

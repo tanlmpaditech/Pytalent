@@ -14,4 +14,8 @@ export class MemoryDto {
   @Expose()
   @IsOptional()
   time: Number;
+
+  @Expose()
+  @IsOptional()
+  score: Number;
 }

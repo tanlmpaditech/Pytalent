@@ -16,6 +16,10 @@ export class GameController extends BaseController {
   async addGame(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
       const data: GameDto = req.body;
+      const gameTypeExisted = this.gameRepository.findByCondition(data.type);
+      if(gameTypeExisted) {
+        return this.setMessage('Existed').responseErrors(res)
+      }
       await this.gameRepository.create(data)
       return this.setData(data).setMessage('Success').responseSuccess(res);
     } catch (error) {

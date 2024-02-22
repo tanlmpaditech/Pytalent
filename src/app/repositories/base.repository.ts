@@ -20,9 +20,9 @@ export abstract class BaseRepository<M extends Model> implements BaseRepositoryI
     return this.model.findAll()
   }
 
-  // async findAttributes(attribute: any, limit: number): Promise<M[]> {
-  //   return this.model.findAll({attributes: attribute}, limit: limit)
-  // }
+  async findAttributes(attribute: any): Promise<M[]> {
+    return this.model.findAll({attributes: attribute})
+  }
 
   async findByCondition(object: Object): Promise<M> {
     return this.model.findOne(object)

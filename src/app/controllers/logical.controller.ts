@@ -15,7 +15,7 @@ export class LogicalController extends BaseController {
 
   @Authorized()
   @UseBefore(AuthMiddleware)
-  @Get('/assessment/:id/logical')
+  @Get('/assessment/:id/logical-game')
   async getLogicalQuestion(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
       const getQuestion = await this.logicalRepository.getLimit(['question', 'answer'], 20) //get 20 questions
