@@ -4,7 +4,6 @@ import { BaseController } from './base.controller'
 import { Service } from 'typedi'
 import ResultRepository from '@repositories/result.repository'
 import { ResultDto } from 'dtos/result.dto'
-import { HrAuthMiddleware } from '@middlewares/hr_auth.middleware'
 import { AdminMiddleware } from '@middlewares/admin.middleware'
 import { AuthMiddleware } from '@middlewares/auth.middleware'
 import DB from '@models/index'
@@ -22,7 +21,9 @@ export class ResultController extends BaseController {
   async postCandidateResult(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
       const data: ResultDto = req.body;
-      const existedResult = await this.resultRepository.findByCondition(data);
+      const existedResult = await this.resultRepository.findByCondition({
+        where: {candidate_id: data.candidate_id, assessment_game_id: data.assessment_game_id}
+      });
       if(existedResult) {
         return this.setMessage('Result existed').responseErrors(res)
       }
@@ -57,14 +58,14 @@ export class ResultController extends BaseController {
   @Authorized()
   @UseBefore(AuthMiddleware)
   @Get('/result')
-  async getCandidateResultByEmail(@Req() req: Request, @Res() res: Response, next: NextFunction) {
+  async getCandidateResultById(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
-      const id = req.body.id;
+      // const id = req.body.id;
       const accessToken = req.headers.authorization.split('Bearer ')[1].trim();
       const payload = JSON.parse(Buffer.from(accessToken.split('.')[1], 'base64').toString());
       const candidate_id = payload.id;
-      const result = await this.resultRepository.findByCondition({
-        where: {id: id},
+      const result = await this.resultRepository.findAllByCondition({
+        where: {candidate_id: candidate_id},
         include: [{
           model: DB.sequelize.models.Assessment_game,
           attributes: ['assessment_id'],
@@ -76,9 +77,6 @@ export class ResultController extends BaseController {
       })
       if(!result) {
         return this.setMessage('Result is not existed').responseErrors(res)
-      }
-      if(result.candidate_id !== candidate_id) {
-        return this.setMessage('You do not have permission').responseErrors(res)
       }
       return this.setData(result).setMessage('Get result successfully').responseSuccess(res);
     } catch (error) {

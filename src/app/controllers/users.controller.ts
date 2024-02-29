@@ -3,12 +3,10 @@ import { NextFunction, Response } from 'express'
 import { BaseController } from './base.controller'
 import { Service } from 'typedi'
 import UserRepository from '@repositories/user.repository'
-import { HrAuthMiddleware } from '@middlewares/hr_auth.middleware'
 import { AuthRequest } from '@interfaces/response.interface'
 import { UserDto } from 'dtos/user.dto'
 import { AdminMiddleware } from '@middlewares/admin.middleware'
 import bcrypt from 'bcrypt'
-import { AuthMiddleware } from '@middlewares/auth.middleware'
 
 @JsonController()
 @Service()

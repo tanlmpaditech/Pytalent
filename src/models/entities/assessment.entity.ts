@@ -13,7 +13,8 @@ export default class Assessment extends Model<Assessment> {
 
   @ForeignKey(() => Assessment_game)
   @ForeignKey(() => Candidate_assessment)
-  assessment_id: number;
+  @Column
+  assessment_id!: Number;
 
   @Column
   start!: Date;

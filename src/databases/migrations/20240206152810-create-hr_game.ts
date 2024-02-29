@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false,
       },
       game_id: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.INTEGER,
         field: 'game_id',
         allowNull: false,
       },

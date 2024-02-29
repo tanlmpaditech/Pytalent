@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false,
       },
       assessment_id: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.INTEGER,
         field: 'assessment_id',
         allowNull: false,
       },

@@ -21,7 +21,7 @@ export class Hr_gameController extends BaseController {
     try {
       const data: Hr_gameDto = req.body;
       const existed = await this.hr_gameRepository.findByCondition({
-        where: {data}
+        where: {hr_id: data.hr_id, game_id: data.game_id}
       })
       if(existed) {
         return this.setMessage('Existed').responseErrors(res)
@@ -29,16 +29,19 @@ export class Hr_gameController extends BaseController {
       await this.hr_gameRepository.create(data)
       return this.setData(data).setMessage('Success').responseSuccess(res);
     } catch (error) {
+      console.log(error);
       return this.setMessage('Error').responseErrors(res)
     }
   }
 
+  @Authorized()
+  @UseBefore(AdminMiddleware)
   @Post('/delete-hr-from-game')
   async deleteHrFromGame(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
       const payload = req.body;
       const data = await this.hr_gameRepository.findByCondition({
-        where: {payload}
+        where: {hr_id: payload.hr_id, game_id: payload.game_id}
       })
       if(!data) {
         return this.setMessage('Error').responseErrors(res)

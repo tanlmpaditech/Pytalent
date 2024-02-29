@@ -62,7 +62,6 @@ export class AssessmentController extends BaseController {
       const candidate_id_in_assessment = assessment.candidate_assessment.map((dataValues) =>
         dataValues.candidate_id
       );
-      // console.log(candidate_id_in_assessment);
       const hr_id_create_assessment = assessment.hr_id;
      
       if(!candidate_id_in_assessment.includes(user_id) && hr_id_create_assessment !== user_id) {
@@ -81,17 +80,24 @@ export class AssessmentController extends BaseController {
   @Post('/create-assessment')
   async createAssessment(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
+      const assessment_id = req.body.assessment_id;
+      const existed = await this.assessmentRepository.findById(assessment_id)
+      if(existed) {
+        return this.setMessage('Assessment ID is existed').responseSuccess(res);
+      }
       const currentDate = new Date();
       const accessToken = req.headers.authorization.split('Bearer ')[1].trim();
       const payload = JSON.parse(Buffer.from(accessToken.split('.')[1], 'base64').toString());
       const hr_id = payload.id;
-      const data: AssessmentDto = {...req.body, hr_id};
+      const data: AssessmentDto = {...req.body, hr_id}
+      
       if(data.end < currentDate) {
         return this.setMessage('Error').responseErrors(res)
       }
       await this.assessmentRepository.create(data)
       return this.setData(data).setMessage('Success').responseSuccess(res);
     } catch (error) {
+      console.log(error);
       return this.setMessage('Error').responseErrors(res)
     }
   }
@@ -113,8 +119,9 @@ export class AssessmentController extends BaseController {
         return this.setMessage('You do not have permission to delete this assessment').responseErrors(res);
       }
       await this.assessmentRepository.deleteById(id)
-      return this.setMessage('Success').responseSuccess(res);
-    } catch (error) {
+      return this.setData(assessment).setMessage('Success').responseSuccess(res);
+    } 
+    catch (error) {
       console.log(error);
       return this.setMessage('Error').responseErrors(res);
     }
@@ -122,7 +129,7 @@ export class AssessmentController extends BaseController {
 
   @Authorized()
   @UseBefore(HrAuthMiddleware)
-  @Put('/assessment/change-status/:id')
+  @Put('/assessment/update/:id')
   async changeStatusAssessment(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
@@ -131,7 +138,7 @@ export class AssessmentController extends BaseController {
       const payload = JSON.parse(Buffer.from(accessToken.split('.')[1], 'base64').toString());
       const hr_id = payload.id;
       if(assessment.hr_id !== hr_id) {
-        return this.setMessage('You do not have permission to change status').responseErrors(res);
+        return this.setMessage('You do not have permission to update the assessment').responseErrors(res);
       }
       const newAssessment = assessment.update(req.body);
       return this.setData(newAssessment).setMessage('Success').responseSuccess(res);

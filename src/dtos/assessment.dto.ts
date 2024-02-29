@@ -3,6 +3,10 @@ import { IsDate, IsEmail, IsNumber, IsOptional, IsString } from 'class-validator
 
 export class AssessmentDto {
   @Expose()
+  @IsOptional()
+  assessment_id: Number;
+
+  @Expose()
   @IsDate()
   @IsOptional()
   start: Date;

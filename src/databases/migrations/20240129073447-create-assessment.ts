@@ -16,10 +16,12 @@ module.exports = {
       start: {
         type: Sequelize.DataTypes.DATE,
         field: 'start',
+        allowNull: false,
       },
       end: {
         type: Sequelize.DataTypes.DATE,
         field: 'end',
+        allowNull: false,
       },
       status: {
         type: Sequelize.DataTypes.STRING,
@@ -27,7 +29,7 @@ module.exports = {
         allowNull: false,
       },
       hr_id: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.INTEGER,
         field: 'hr_id',
         allowNull: false,
       },
