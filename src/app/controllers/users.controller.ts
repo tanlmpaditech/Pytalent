@@ -23,7 +23,7 @@ export class UsersController extends BaseController {
       const findAllUsersData = await this.userRepository.getAll()
       return this.setData(findAllUsersData).setMessage('Success').responseSuccess(res)
     } catch (error) {
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData('').setMessage('Error').responseErrors(res)
     }
   }
 
@@ -36,7 +36,7 @@ export class UsersController extends BaseController {
       const findUserById = await this.userRepository.findById(id);
       return this.setData(findUserById).setMessage('Get user detail successfully').responseSuccess(res);
     } catch (error) {
-      return this.setMessage('Error').responseErrors(res);
+      return this.setData('').setMessage('Error').responseErrors(res);
     }
   }
 
@@ -60,7 +60,7 @@ export class UsersController extends BaseController {
       await this.userRepository.create(userCreated)
       return this.setData(userCreated).setMessage('Success').responseSuccess(res);
     } catch (error) {
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData('').setMessage('Error').responseErrors(res)
     }
   }
 }

@@ -17,7 +17,7 @@ export class RoleController extends BaseController {
       await this.roleRepository.create(data)
       return this.setData(data).setMessage('Success').responseSuccess(res);
     } catch (error) {
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData('').setMessage('Error').responseErrors(res)
     }
   }
 }

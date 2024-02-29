@@ -35,7 +35,7 @@ export class AssessmentController extends BaseController {
       return this.setData(assessments).setMessage('Success').responseSuccess(res);
     } catch (error) {
       console.log(error);
-      return this.setMessage('Error').responseErrors(res);
+      return this.setData('').setMessage('Error').responseErrors(res);
     }
   }
 
@@ -64,14 +64,14 @@ export class AssessmentController extends BaseController {
       );
       const hr_id_create_assessment = assessment.hr_id;
      
-      if(!candidate_id_in_assessment.includes(user_id) && hr_id_create_assessment !== user_id) {
-        return this.setMessage('You do not have permission').responseErrors(res)
+      if(!candidate_id_in_assessment.includes(+user_id) && hr_id_create_assessment !== user_id) {
+        return this.setData('').setMessage('You do not have permission').responseErrors(res)
       }
       
       return this.setData(assessment).setMessage('Success').responseSuccess(res);
     } catch (error) {
       console.log(error);
-      return this.setMessage('Error').responseErrors(res);
+      return this.setData('').setMessage('Error').responseErrors(res);
     }
   }
 
@@ -92,13 +92,13 @@ export class AssessmentController extends BaseController {
       const data: AssessmentDto = {...req.body, hr_id}
       
       if(data.end < currentDate) {
-        return this.setMessage('Error').responseErrors(res)
+        return this.setData('').setMessage('Error').responseErrors(res)
       }
       await this.assessmentRepository.create(data)
       return this.setData(data).setMessage('Success').responseSuccess(res);
     } catch (error) {
       console.log(error);
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData('').setMessage('Error').responseErrors(res)
     }
   }
 
@@ -123,7 +123,7 @@ export class AssessmentController extends BaseController {
     } 
     catch (error) {
       console.log(error);
-      return this.setMessage('Error').responseErrors(res);
+      return this.setData('').setMessage('Error').responseErrors(res);
     }
   }
 
@@ -143,9 +143,7 @@ export class AssessmentController extends BaseController {
       const newAssessment = assessment.update(req.body);
       return this.setData(newAssessment).setMessage('Success').responseSuccess(res);
     } catch (error) {
-      return this.setMessage('Error').responseErrors(res);
+      return this.setData('').setMessage('Error').responseErrors(res);
     }
   }
-
-
 }

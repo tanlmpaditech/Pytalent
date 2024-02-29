@@ -46,7 +46,7 @@ export class Assessment_gameController extends BaseController {
       return this.setData(data).setMessage('Success').responseSuccess(res);   
     } catch (error) {
       // console.log(error);
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData('').setMessage('Error').responseErrors(res)
     }
   }
 
@@ -71,13 +71,13 @@ export class Assessment_gameController extends BaseController {
       })
 
       if(!data) {
-        return this.setMessage('Error').responseErrors(res)
+        return this.setData('').setMessage('Error').responseErrors(res)
       }
       
       await this.Assessment_gameRepository.deleteById(data.id)
       return this.setData(data).setMessage('Success').responseSuccess(res);
     } catch (error) {
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData('').setMessage('Error').responseErrors(res)
     }
   }
 }

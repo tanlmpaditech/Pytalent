@@ -30,7 +30,7 @@ export class ResultController extends BaseController {
       await this.resultRepository.create(data);
       return this.setData(data).setMessage('Success').responseSuccess(res);
     } catch (error) {
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData('').setMessage('Error').responseErrors(res)
     }
   }
 
@@ -51,7 +51,7 @@ export class ResultController extends BaseController {
       })
       return this.setData(allCandidateResults).setMessage('Success').responseSuccess(res)
     } catch (error) {
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData('').setMessage('Error').responseErrors(res)
     }
   }
 
@@ -81,7 +81,7 @@ export class ResultController extends BaseController {
       return this.setData(result).setMessage('Get result successfully').responseSuccess(res);
     } catch (error) {
       console.log(error);
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData('').setMessage('Error').responseErrors(res)
     }
   }
 }

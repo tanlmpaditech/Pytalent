@@ -22,7 +22,7 @@ export class LogicalController extends BaseController {
       return this.setData(getQuestion).setMessage('Success').responseSuccess(res)
     } catch (error) {
       console.log(error);
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData('').setMessage('Error').responseErrors(res)
     }
   }
 

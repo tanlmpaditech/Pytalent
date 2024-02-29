@@ -25,12 +25,12 @@ export class Candidate_assessmentController extends BaseController {
         where: {assessment_id: assessment_id, candidate_id: candidate_id}
       });
       if(existed) {
-        return this.setMessage('Existed').responseErrors(res)
+        return this.setData('').setMessage('Existed').responseErrors(res)
       }
       await this.Candidate_assessmentRepository.create(data)
       return this.setData(data).setMessage('Success').responseSuccess(res);
     } catch (error) {
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData('').setMessage('Error').responseErrors(res)
     }
   }
 
@@ -47,7 +47,7 @@ export class Candidate_assessmentController extends BaseController {
       const assessment = await this.AssessmentRepository.findById(+assessment_id);
 
       if(assessment.hr_id !== hr_id) {
-        return this.setMessage('You do not have permission').responseErrors(res); 
+        return this.setData('').setMessage('You do not have permission').responseErrors(res); 
       };
 
       const data = await this.Candidate_assessmentRepository.findByCondition({
@@ -55,13 +55,13 @@ export class Candidate_assessmentController extends BaseController {
       })
 
       if(!data) {
-        return this.setMessage('Error').responseErrors(res)
+        return this.setData('').setMessage('Error').responseErrors(res)
       }
       
       await this.Candidate_assessmentRepository.deleteById(data.id)
       return this.setData(data).setMessage('Success').responseSuccess(res);
     } catch (error) {
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData('').setMessage('Error').responseErrors(res)
     }
   }
 }

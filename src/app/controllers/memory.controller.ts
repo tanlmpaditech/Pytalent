@@ -23,7 +23,7 @@ export class MemoryController extends BaseController {
       return this.setData(data).setMessage('Success').responseSuccess(res)
     } catch (error) {
       console.log(error);
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData('').setMessage('Error').responseErrors(res)
     }
   }
 }

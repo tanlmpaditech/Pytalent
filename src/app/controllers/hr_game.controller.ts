@@ -30,7 +30,7 @@ export class Hr_gameController extends BaseController {
       return this.setData(data).setMessage('Success').responseSuccess(res);
     } catch (error) {
       console.log(error);
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData('').setMessage('Error').responseErrors(res)
     }
   }
 
@@ -44,12 +44,12 @@ export class Hr_gameController extends BaseController {
         where: {hr_id: payload.hr_id, game_id: payload.game_id}
       })
       if(!data) {
-        return this.setMessage('Error').responseErrors(res)
+        return this.setData('').setMessage('Error').responseErrors(res)
       }
       await this.hr_gameRepository.deleteById(data.id)
       return this.setData(data).setMessage('Success').responseSuccess(res);
     } catch (error) {
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData('').setMessage('Error').responseErrors(res)
     }
   }
 }
