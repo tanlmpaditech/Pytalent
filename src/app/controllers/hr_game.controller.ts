@@ -6,11 +6,16 @@ import Hr_gameRepository from '@repositories/hr_game.repository'
 import { Hr_gameDto } from 'dtos/hr_game.dto'
 import GameRepository from '@repositories/game.repository'
 import { AdminMiddleware } from '@middlewares/admin.middleware'
+import UserRepository from '@repositories/user.repository'
 
 @JsonController()
 @Service()
 export class Hr_gameController extends BaseController {
-  constructor(protected hr_gameRepository: Hr_gameRepository, protected GameRepository: GameRepository) {
+  constructor(
+    protected hr_gameRepository: Hr_gameRepository, 
+    protected GameRepository: GameRepository,
+    protected UserRepository: UserRepository
+  ) {
     super()
   }
 
@@ -20,11 +25,21 @@ export class Hr_gameController extends BaseController {
   async addHrToGame(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
       const data: Hr_gameDto = req.body;
+      const user = await this.UserRepository.findByCondition({
+        where: {user_id: data.hr_id}
+      })
+      if(user.role_id !== 1) {
+        return this.setData('').setMessage('HR ID is not existed').responseErrors(res)
+      }
+      const game = await this.GameRepository.findById(+data.game_id);
+      if(!game) {
+        return this.setData('').setMessage('Game ID is not existed').responseErrors(res)
+      }
       const existed = await this.hr_gameRepository.findByCondition({
         where: {hr_id: data.hr_id, game_id: data.game_id}
       })
       if(existed) {
-        return this.setMessage('Existed').responseErrors(res)
+        return this.setData('').setMessage('Existed').responseErrors(res)
       }
       await this.hr_gameRepository.create(data)
       return this.setData(data).setMessage('Success').responseSuccess(res);

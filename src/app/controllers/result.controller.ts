@@ -25,7 +25,7 @@ export class ResultController extends BaseController {
         where: {candidate_id: data.candidate_id, assessment_game_id: data.assessment_game_id}
       });
       if(existedResult) {
-        return this.setMessage('Result existed').responseErrors(res)
+        return this.setData('').setMessage('Result existed').responseErrors(res)
       }
       await this.resultRepository.create(data);
       return this.setData(data).setMessage('Success').responseSuccess(res);
@@ -76,7 +76,7 @@ export class ResultController extends BaseController {
         }],
       })
       if(!result) {
-        return this.setMessage('Result is not existed').responseErrors(res)
+        return this.setData('').setMessage('Result is not existed').responseErrors(res)
       }
       return this.setData(result).setMessage('Get result successfully').responseSuccess(res);
     } catch (error) {

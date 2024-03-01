@@ -11,7 +11,8 @@ export class RoleController extends BaseController {
     super()
   }
 
-  async addUrl(@Req() req: Request, @Res() res: Response, next: NextFunction) {
+  @Post('/add-role')
+  async addData(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
       const data = req.body;
       await this.roleRepository.create(data)

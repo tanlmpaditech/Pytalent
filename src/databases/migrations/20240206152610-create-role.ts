@@ -8,11 +8,21 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.DataTypes.INTEGER
       },
+      role_id: {
+        type: Sequelize.DataTypes.INTEGER,
+        field: 'role_id',
+        allowNull: false,
+      },
+      role_type: {
+        type: Sequelize.DataTypes.STRING,
+        field: 'role_type',
+        allowNull: false,
+      },
       url: {
         type: Sequelize.DataTypes.STRING,
         field: 'url',
-        allowNull: false,
       },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DataTypes.DATE,

@@ -5,11 +5,16 @@ import { Service } from 'typedi'
 import Candidate_assessmentRepository from '@repositories/candidate_assessment.repository'
 import { HrAuthMiddleware } from '@middlewares/hr_auth.middleware'
 import AssessmentRepository from '@repositories/assessment.repository'
+import UserRepository from '@repositories/user.repository'
 
 @JsonController()
 @Service()
 export class Candidate_assessmentController extends BaseController {
-  constructor(protected Candidate_assessmentRepository: Candidate_assessmentRepository, protected AssessmentRepository: AssessmentRepository) {
+  constructor(
+    protected Candidate_assessmentRepository: Candidate_assessmentRepository, 
+    protected AssessmentRepository: AssessmentRepository,
+    protected UserRepository: UserRepository
+  ) {
     super()
   }
 
@@ -21,6 +26,16 @@ export class Candidate_assessmentController extends BaseController {
       const assessment_id = req.params.assessment_id;
       const candidate_id = req.body.candidate_id;
       const data = {assessment_id, candidate_id}
+      const findUserById = await this.UserRepository.findById(candidate_id);
+      if(!findUserById || findUserById.role_id !== 2) {
+        return this.setData('').setMessage('Candidate ID is not existed').responseErrors(res)
+      }
+      const assessment = await this.AssessmentRepository.findByCondition({
+        where: {assessment_id: assessment_id}
+      });
+      if(!assessment) {
+        return this.setData('').setMessage('Assessment ID is not existed');
+      }
       const existed = await this.Candidate_assessmentRepository.findByCondition({
         where: {assessment_id: assessment_id, candidate_id: candidate_id}
       });
@@ -44,20 +59,21 @@ export class Candidate_assessmentController extends BaseController {
       const accessToken = req.headers.authorization.split('Bearer ')[1].trim();
       const payload = JSON.parse(Buffer.from(accessToken.split('.')[1], 'base64').toString());
       const hr_id = payload.id;
-      const assessment = await this.AssessmentRepository.findById(+assessment_id);
-
+      const assessment = await this.AssessmentRepository.findByCondition({
+        where: {assessment_id: assessment_id}
+      });
+      if(!assessment) {
+        return this.setData('').setMessage('Assessment ID is not existed').responseErrors(res);
+      }
       if(assessment.hr_id !== hr_id) {
         return this.setData('').setMessage('You do not have permission').responseErrors(res); 
       };
-
       const data = await this.Candidate_assessmentRepository.findByCondition({
         where: {assessment_id: assessment_id, candidate_id: candidate_id}
       })
-
       if(!data) {
         return this.setData('').setMessage('Error').responseErrors(res)
       }
-      
       await this.Candidate_assessmentRepository.deleteById(data.id)
       return this.setData(data).setMessage('Success').responseSuccess(res);
     } catch (error) {

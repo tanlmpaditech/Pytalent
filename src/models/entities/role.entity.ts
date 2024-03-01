@@ -10,7 +10,13 @@ export default class Role extends Model<Role> {
   id!: number;
 
   @Column
-  url!: String;
+  role_id!: number;
+
+  @Column
+  role_type!: string;
+
+  @Column
+  url: string;
 
   @CreatedAt
   @Column

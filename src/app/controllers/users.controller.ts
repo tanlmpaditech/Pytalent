@@ -49,7 +49,7 @@ export class UsersController extends BaseController {
       const hashPassword = bcrypt.hashSync(req.body.password, 10);
       const userExistedByEmail = await this.userRepository.findByCondition(req.body.email);
       if(userExistedByEmail) {
-        return this.setMessage('User existed').responseErrors(res)
+        return this.setData('').setMessage('User existed').responseErrors(res)
       }
       const userCreated = {
         name: data.name,

@@ -7,6 +7,15 @@ export class RoleDto {
   id: number;
 
   @Expose()
+  @IsOptional()
+  role_id: number;
+
+  @Expose()
+  @IsOptional()
+  role_type: number;
+
+
+  @Expose()
   @IsString()
   @IsOptional()
   url: string;

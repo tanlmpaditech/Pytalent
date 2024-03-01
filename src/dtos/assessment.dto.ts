@@ -12,7 +12,7 @@ export class AssessmentDto {
   start: Date;
 
   @Expose()
-  @IsString()
+  @IsDate()
   @IsOptional()
   end: Date;
 

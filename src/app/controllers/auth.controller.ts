@@ -36,7 +36,7 @@ class AuthController extends BaseController {
       const refreshToken = createRefreshToken(findUserByEmail);
       setCacheExpire(`auth_refresh_email_${req.body.email}`, refreshToken, REFRESH_TTL);
       
-      return this.setData({accessToken, refreshToken}).setCode(200).setMessage('Success').responseSuccess(res);
+      return this.setData({accessToken}).setCode(200).setMessage('Success').responseSuccess(res);
     } catch (error) {
         return this.setCode(error.code || 500)
           .setMessage(error.message || 'Internal Server Error')
